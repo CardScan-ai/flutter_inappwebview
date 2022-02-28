@@ -1452,7 +1452,21 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavi
             decisionHandler(navigationActionPolicy, preferences)
         })
     }
-    
+
+
+    @available(iOS 15.0, *)
+    public func webView(_ webView: WKWebView,
+                requestMediaCapturePermissionFor origin: WKSecurityOrigin, 
+                initiatedByFrame frame: WKFrameInfo, 
+                type: WKMediaCaptureType, 
+                decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+//        print("requestMediaCapturePermissionFor:")
+//        print(origin) // <WKSecurityOrigin: 0x280c3c870; protocol = https; host = sandbox-cdn.cardscan.ai; port = 0>
+//        print(type) //WKMediaCaptureType
+        //XXX NLS -- Make this origin specific.
+        decisionHandler(WKPermissionDecision.grant)
+    }
+
     public func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
